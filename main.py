@@ -3,6 +3,7 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 import config
+from bot import handlers
 
 print(sys.path)
 logging.basicConfig(level=logging.INFO)
@@ -10,6 +11,7 @@ logging.basicConfig(level=logging.INFO)
 async def main():
     bot = Bot(token=config.BOT_TOKEN)
     dp = Dispatcher(storage=MemoryStorage())
+    dp.include_router(handlers.router)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
